@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sabina.hillcipher.MainActivity">
+
+
+    <TextView
+        android:id="@+id/plainTextTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Plain Text :"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="28dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="41dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <EditText
+        android:id="@+id/plainText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="42dp"
+
+        android:layout_alignBaseline="@+id/plainTextTextView"
+        android:layout_alignBottom="@+id/plainTextTextView"
+        android:layout_toRightOf="@+id/plainTextTextView"
+        android:layout_toEndOf="@+id/plainTextTextView"
+        android:layout_marginRight="20dp"
+        />
+
+    <Button
+        android:id="@+id/buttonEncrypt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Encrypt"
+        android:layout_below="@+id/keyText"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/keyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+
+        android:layout_marginTop="62dp"
+        android:layout_below="@+id/plainText"
+        android:layout_alignLeft="@+id/plainTextTextView"
+        android:layout_alignStart="@+id/plainTextTextView" />
+
+    <EditText
+        android:maxLength="4"
+        android:id="@+id/keyText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/keyTextView"
+        android:layout_alignBottom="@+id/keyTextView"
+        android:layout_alignLeft="@+id/plainText"
+        android:layout_alignStart="@+id/plainText"
+        android:layout_marginRight="20dp"/>
+
+    <TextView
+        android:id="@+id/encryptedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Encrypted text"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/keyTextView"
+        android:layout_alignStart="@+id/keyTextView" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/encryptedEditText"
+        android:layout_alignBaseline="@+id/encryptedTextView"
+        android:layout_alignBottom="@+id/encryptedTextView"
+        android:layout_alignLeft="@+id/keyText"
+        android:layout_alignStart="@+id/keyText"
+        android:layout_alignRight="@+id/keyText"
+        android:layout_alignEnd="@+id/keyText" />
+
+    <TextView
+        android:id="@+id/textViewKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Decryption Key"
+        android:layout_marginTop="72dp"
+        android:layout_below="@+id/encryptedEditText"
+        android:layout_alignLeft="@+id/encryptedTextView"
+        android:layout_alignStart="@+id/encryptedTextView" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/decryptEditText"
+        android:layout_alignBaseline="@+id/textViewKey"
+        android:layout_alignBottom="@+id/textViewKey"
+        android:layout_alignLeft="@+id/encryptedEditText"
+        android:layout_alignStart="@+id/encryptedEditText"
+        android:layout_alignRight="@+id/encryptedEditText"
+        android:layout_alignEnd="@+id/encryptedEditText" />
+
+    <Button
+        android:id="@+id/decryptButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Decrypt"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/buttonEncrypt"
+        android:layout_alignStart="@+id/buttonEncrypt"
+        android:layout_marginBottom="30dp" />
+
+
+</RelativeLayout>
