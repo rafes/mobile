@@ -7,13 +7,20 @@ package com.example.sabina.mobilelab1;
 public class Book {
     private String title;
     private String author;
-    Integer year;
+    private Integer year;
     public Book(String t, String a)
     {
         title=t;
         author=a;
     }
+    public Book(String t, String a,Integer y)
+    {
+        title=t;
+        author=a;
+        year=y;
+    }
 
+    public Integer getYear(){return year;}
     public String getTitle() {
         return title;
     }
@@ -28,5 +35,9 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
     }
 }

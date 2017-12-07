@@ -8,12 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 
 public class EditBookActivity extends AppCompatActivity {
     EditText author, title;
     //EditText title;
     Button saveButton;
     Integer position, code;
+    NumberPicker np;
 
     //Integer code;
     @Override
@@ -32,6 +34,7 @@ public class EditBookActivity extends AppCompatActivity {
             position = data.getInt("Position");
             title.setText(titleExtra);
             author.setText(authorExtra);
+            np.setValue(data.getInt("Year"));
             saveButton.setText("Save");
             saveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -41,6 +44,7 @@ public class EditBookActivity extends AppCompatActivity {
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("AuthorResult", editedAuthor);
                     returnIntent.putExtra("TitleResult", editedTitle);
+                    returnIntent.putExtra("Year",np.getValue());
                     returnIntent.putExtra("Position", position);
                     returnIntent.putExtra("Code",1);
                     setResult(Activity.RESULT_OK, returnIntent);
@@ -50,6 +54,7 @@ public class EditBookActivity extends AppCompatActivity {
 
         } else {
             saveButton.setText("Add");
+            np.setValue(2000);
             saveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -59,7 +64,7 @@ public class EditBookActivity extends AppCompatActivity {
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("AuthorResult", editedAuthor);
                     returnIntent.putExtra("TitleResult", editedTitle);
-                    //returnIntent.putExtra("Position", position);
+                    returnIntent.putExtra("Year", np.getValue());
                     returnIntent.putExtra("Code",2);
                     setResult(Activity.RESULT_OK, returnIntent);
                     finish();
@@ -72,5 +77,9 @@ public class EditBookActivity extends AppCompatActivity {
         title = (EditText) findViewById(R.id.TitleEditText);
         author = (EditText) findViewById(R.id.AuthorEditText);
         saveButton = (Button) findViewById(R.id.buttonSave);
+        np = (NumberPicker) findViewById(R.id.numberPicker);
+        np.setMaxValue(2017);
+        np.setMinValue(1900);
+
     }
 }

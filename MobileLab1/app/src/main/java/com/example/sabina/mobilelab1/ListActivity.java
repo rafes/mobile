@@ -1,7 +1,9 @@
 package com.example.sabina.mobilelab1;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,6 +55,7 @@ public class ListActivity extends AppCompatActivity {
         intent.putExtra("Title", book.getTitle());
         intent.putExtra("Position", pos);
         intent.putExtra("Code", 1);
+        intent.putExtra("Year",book.getYear());
         startActivityForResult(intent, 1);
     }
 
@@ -65,12 +68,12 @@ public class ListActivity extends AppCompatActivity {
 
     void initialiseBookList()
     {
-        Book b1=new Book("Sabina","Paul Goma");
-        Book b2=new Book("First Grave","Darynda Jones");
-        Book b3=new Book("Where women are kings","Christie Watson");
-        Book b4=new Book("Algoritmica Amuzanta","Paul Goma");
-        Book b5=new Book("Woman in Red","Eileen Goudge");
-        Book b6=new Book("The phantom of the opera","Gaston Leroux");
+        Book b1=new Book("Sabina","Paul Goma",2008);
+        Book b2=new Book("First Grave","Darynda Jones",2014);
+        Book b3=new Book("Where women are kings","Christie Watson",2017);
+        Book b4=new Book("Algoritmica Amuzanta","Paul Goma",1990);
+        Book b5=new Book("Woman in Red","Eileen Goudge",1996);
+        Book b6=new Book("The phantom of the opera","Gaston Leroux",1977);
         mybooks.add(b1);
         mybooks.add(b2);
         mybooks.add(b3);
@@ -92,6 +95,8 @@ public class ListActivity extends AppCompatActivity {
                 Integer position=result.getInt("Position");
                 mybooks.get(position).setAuthor(Resultauthor);
                 mybooks.get(position).setTitle(Resulttitle);
+                Integer ResultYear=result.getInt("Year");
+                mybooks.get(position).setYear(ResultYear);
                 custumAdapter.notifyDataSetChanged();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -106,12 +111,23 @@ public class ListActivity extends AppCompatActivity {
                 Bundle result = data.getExtras();
                 String Resulttitle = result.getString("TitleResult");
                 String Resultauthor = result.getString("AuthorResult");
-                Book b = new Book(Resulttitle, Resultauthor);
+                Integer year=result.getInt("Year");
+                Book b = new Book(Resulttitle, Resultauthor,year);
                 mybooks.add(b);
                 custumAdapter.notifyDataSetChanged();
             }
 
         }
+    }
+    public AlertDialog.Builder createDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Delete this book?");
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+
+        return builder;
     }
 
     class Adapter extends BaseAdapter
@@ -147,8 +163,16 @@ public class ListActivity extends AppCompatActivity {
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    elements.remove(position);
-                    notifyDataSetChanged();
+                    AlertDialog.Builder builder = createDialog();
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            elements.remove(position);
+                            notifyDataSetChanged();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
                 }
             });
             t1.setText(elements.get(position).getTitle());

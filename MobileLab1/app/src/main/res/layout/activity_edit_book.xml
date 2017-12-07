@@ -47,8 +47,34 @@
         android:id="@+id/buttonSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/numberPicker"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="14dp"
         android:text="Save" />
+
+
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Year"
+        android:textSize="20dp"
+        android:layout_alignTop="@+id/numberPicker"
+        android:layout_alignRight="@+id/textView4"
+        android:layout_alignEnd="@+id/textView4"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <NumberPicker
+        android:id="@+id/numberPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="77dp"
+        android:layout_below="@+id/AuthorEditText"
+        android:layout_alignLeft="@+id/AuthorEditText"
+        android:layout_alignStart="@+id/AuthorEditText" />
+
+
 
 </RelativeLayout>

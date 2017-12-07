@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".EditBookActivity" />
-        <activity android:name=".ListActivity"></activity>
+        <activity android:name=".ListActivity"/>
     </application>
 
 </manifest>
