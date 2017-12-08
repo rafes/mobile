@@ -1,6 +1,7 @@
 package com.example.sabina.mobilelab1;
 
 import android.app.Activity;
+import android.arch.persistence.room.Room;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -24,6 +25,10 @@ public class ListActivity extends AppCompatActivity {
     Adapter custumAdapter;
     List<Book> mybooks = new ArrayList<>();
     Button addButton;
+    AppDatabase db;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +42,9 @@ public class ListActivity extends AppCompatActivity {
                 addBook();
             }
         });
-        initialiseBookList();
+        db= Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"mybooks").allowMainThreadQueries().build();
+        mybooks=db.bookDAO().getBooks();
+        //initialiseBookList();
         custumAdapter = new Adapter(mybooks);
         books.setAdapter(custumAdapter);
         books.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -66,21 +73,6 @@ public class ListActivity extends AppCompatActivity {
         startActivityForResult(intent, 2);
     }
 
-    void initialiseBookList()
-    {
-        Book b1=new Book("Sabina","Paul Goma",2008);
-        Book b2=new Book("First Grave","Darynda Jones",2014);
-        Book b3=new Book("Where women are kings","Christie Watson",2017);
-        Book b4=new Book("Algoritmica Amuzanta","Paul Goma",1990);
-        Book b5=new Book("Woman in Red","Eileen Goudge",1996);
-        Book b6=new Book("The phantom of the opera","Gaston Leroux",1977);
-        mybooks.add(b1);
-        mybooks.add(b2);
-        mybooks.add(b3);
-        mybooks.add(b4);
-        mybooks.add(b5);
-        mybooks.add(b6);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -113,7 +105,9 @@ public class ListActivity extends AppCompatActivity {
                 String Resultauthor = result.getString("AuthorResult");
                 Integer year=result.getInt("Year");
                 Book b = new Book(Resulttitle, Resultauthor,year);
+                db.bookDAO().insert(b);
                 mybooks.add(b);
+                //mybooks=db.bookDAO().getBooks();
                 custumAdapter.notifyDataSetChanged();
             }
 
@@ -166,6 +160,8 @@ public class ListActivity extends AppCompatActivity {
                     AlertDialog.Builder builder = createDialog();
                     builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
+                            Book b=elements.get(position);
+                            db.bookDAO().deleteBooks(b);
                             elements.remove(position);
                             notifyDataSetChanged();
                         }
